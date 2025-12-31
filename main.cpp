@@ -1,11 +1,11 @@
-#include "widget.h"
+#include "loginview.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Widget w;
-    w.show();
+    LoginView l;
+    l.show();
     return a.exec();
 }
