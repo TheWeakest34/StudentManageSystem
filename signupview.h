@@ -18,6 +18,9 @@ public:
 private slots:
     void on_btCancel_clicked();
 
+
+    void on_btSignUp_clicked();
+
 signals:
     void gotoLoginView();
 

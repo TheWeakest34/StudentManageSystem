@@ -124,6 +124,16 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout">
                <item>
+                <widget class="QLineEdit" name="UserName">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QLineEdit" name="Password">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -136,16 +146,6 @@
                  </property>
                 </widget>
                </item>
-               <item>
-                <widget class="QLineEdit" name="UserName">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </item>
             </layout>
@@ -154,6 +154,11 @@
          </item>
          <item>
           <widget class="QLabel" name="ErrorLabel">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string/>
            </property>

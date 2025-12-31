@@ -1,5 +1,6 @@
 #include "loginview.h"
 #include "ui_loginview.h"
+#include "idatabase.h"
 
 LoginView::LoginView(QWidget *parent)
     : QWidget(parent)
@@ -18,9 +19,18 @@ LoginView::~LoginView()
 
 void LoginView::on_btSignIn_clicked()
 {
-    mainWindow = new MainWindow;
-    mainWindow->show();
-    this->hide();
+    QString status = IDataBase::getInstance().userLogin(ui->UserName->text(),ui->Password->text());
+
+    if(status == "true"){
+        mainWindow = new MainWindow;
+        mainWindow->show();
+        this->hide();
+    }
+
+    else{
+        ui->ErrorLabel->setText(status);
+        ui->ErrorLabel->setStyleSheet("QLabel { color : red; }");
+    }
 }
 
 void LoginView::ReturnToLogin()

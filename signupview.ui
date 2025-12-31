@@ -70,7 +70,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>10</width>
          <height>20</height>
         </size>
        </property>
@@ -125,7 +125,7 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_10">
              <item>
-              <widget class="QLineEdit" name="UserName_2">
+              <widget class="QLineEdit" name="UserName">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -135,7 +135,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="Password_2">
+              <widget class="QLineEdit" name="Password">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -164,7 +164,12 @@
         </layout>
        </item>
        <item>
-        <widget class="QLabel" name="ErrorLabel_2">
+        <widget class="QLabel" name="ErrorLabel">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -192,7 +197,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>20</width>
+             <width>30</width>
              <height>20</height>
             </size>
            </property>
@@ -218,7 +223,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btSignUp_3">
+          <widget class="QPushButton" name="btSignUp">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -246,7 +251,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>20</width>
+             <width>30</width>
              <height>20</height>
             </size>
            </property>
@@ -276,7 +281,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
+         <width>10</width>
          <height>20</height>
         </size>
        </property>
