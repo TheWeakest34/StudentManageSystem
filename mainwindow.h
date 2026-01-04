@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "studenteditview.h"
+#include <QTableView>
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +27,8 @@ private slots:
     void on_btDelete_clicked();
 
     void on_btOrder_clicked();
+
+    void initTableView(QTableView *tableview);
 
 private:
     Ui::MainWindow *ui;

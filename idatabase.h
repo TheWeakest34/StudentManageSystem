@@ -5,13 +5,16 @@
 #include <QSqlDatabase>
 #include <QSqlTableModel>
 #include <QItemSelectionModel>
+#include <QVector>
 
 class IDataBase : public QObject
 {
     Q_OBJECT
 public:
-    QSqlTableModel *studentTableModel;
-    QItemSelectionModel *studentSelection;
+    static const int Max_Tabs = 10;   //最大支持的页面数
+
+    QVector<QSqlTableModel *> studentTableModels;
+    QVector<QItemSelectionModel *>studentSelections;
 
     static IDataBase &getInstance(){
         static IDataBase instance;
@@ -21,12 +24,15 @@ public:
     QString userLogin(QString userName,QString password);
     QString userSignUp(QString userName,QString password,QString confirmPassword);
 
+    QSqlTableModel *getSqlTableModel(int index);   //通过下标索引来获取模型
+    QItemSelectionModel *getItemSelectionModel(int index);
+
     bool initStudentModel();
-    bool searchStudent(QString filter);
-    void deleteStudent();
-    bool submitStudentEdit();
-    void revertStudentEdit();
-    int addNewStudent();
+    bool searchStudent(int index,QString filter);
+    void deleteStudent(int index);
+    bool submitStudentEdit(int index);
+    void revertStudentEdit(int index);
+    int addNewStudent(int index);
 
 private:
     explicit IDataBase(QObject *parent = nullptr);

@@ -14,7 +14,7 @@ class StudentEditView : public QDialog
     Q_OBJECT
 
 public:
-    explicit StudentEditView(QWidget *parent = nullptr,int index = 0);
+    explicit StudentEditView(QWidget *parent = nullptr,int index = 0,int tabIndex = 0);
     ~StudentEditView();
 
 private slots:
@@ -27,6 +27,7 @@ private:
     Ui::StudentEditView *ui;
     QDataWidgetMapper *dataMapper;
     QSqlTableModel *tableModel;
+    int curTabIndex;
 };
 
 #endif // STUDENTEDITVIEW_H

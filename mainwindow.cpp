@@ -9,15 +9,20 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableView->setAlternatingRowColors(true);
+    initTableView(ui->tableView);
+    initTableView(ui->tableView2);
+    initTableView(ui->tableView3);
 
     IDataBase &db = IDataBase::getInstance();
     if(db.initStudentModel()){
-        ui->tableView->setModel(db.studentTableModel);
-        ui->tableView->setSelectionModel(db.studentSelection);
+        ui->tableView->setModel(db.studentTableModels[0]);
+        ui->tableView->setSelectionModel(db.studentSelections[0]);
+
+        ui->tableView2->setModel(db.studentTableModels[1]);
+        ui->tableView2->setSelectionModel(db.studentSelections[1]);
+
+        ui->tableView3->setModel(db.studentTableModels[2]);
+        ui->tableView3->setSelectionModel(db.studentSelections[2]);
     }
 }
 
@@ -26,10 +31,25 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::initTableView(QTableView *tableview)
+{
+    tableview->setSelectionBehavior(QAbstractItemView::SelectRows);
+    tableview->setSelectionMode(QAbstractItemView::SingleSelection);
+    tableview->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    tableview->setAlternatingRowColors(true);
+}
+
 void MainWindow::on_btEdit_clicked()
 {
-    QModelIndex curIndex = IDataBase::getInstance().studentSelection->currentIndex();
-    studentEditView = new StudentEditView(this,curIndex.row());
+    int tabIndex = ui->tabWidget->currentIndex();   //通过索引来找到对应模型
+    QModelIndex curIndex = IDataBase::getInstance().studentSelections[tabIndex]->currentIndex();
+
+    if(curIndex.row() < 0){
+        QMessageBox::warning(this,"提示","请先选择一行!",QMessageBox::Ok);
+        return;
+    }
+
+    studentEditView = new StudentEditView(this,curIndex.row(),tabIndex);
     studentEditView->show();
 }
 
@@ -47,25 +67,28 @@ void MainWindow::on_btSearch_clicked()
     else if(SearchWay == "班级")
         filter = QString("Class like '%%1%'").arg(SearchText);
     else{
-        QMessageBox::information(this,"错误","请选择一种查询方式",QMessageBox::Ok);
+        QMessageBox::warning(this,"错误","请选择一种查询方式",QMessageBox::Ok);
         return;
     }
 
-    IDataBase::getInstance().searchStudent(filter);
+    int tabIndex = ui->tabWidget->currentIndex();
+    IDataBase::getInstance().searchStudent(tabIndex,filter);
 }
 
 
 void MainWindow::on_btAdd_clicked()
 {
-    int curRow = IDataBase::getInstance().addNewStudent();
-    studentEditView = new StudentEditView(this,curRow);
+    int tabIndex = ui->tabWidget->currentIndex();
+    int curRow = IDataBase::getInstance().addNewStudent(tabIndex);
+    studentEditView = new StudentEditView(this,curRow,tabIndex);
     studentEditView->show();
 }
 
 
 void MainWindow::on_btDelete_clicked()
 {
-    IDataBase::getInstance().deleteStudent();
+    int tabIndex = ui->tabWidget->currentIndex();
+    IDataBase::getInstance().deleteStudent(tabIndex);
 }
 
 
@@ -93,7 +116,7 @@ void MainWindow::on_btOrder_clicked()
     else if(sortBy == "总分")
         fieldName = "TotalScore";
     else{
-        QMessageBox::information(this,"错误","请选择一种排序方式",QMessageBox::Ok);
+        QMessageBox::warning(this,"错误","请选择一种排序方式",QMessageBox::Ok);
         return;
     }
 
@@ -104,8 +127,8 @@ void MainWindow::on_btOrder_clicked()
         order = Qt::DescendingOrder;
 
     // 执行排序
-    int columnIndex = db.studentTableModel->fieldIndex(fieldName);
-    db.studentTableModel->setSort(columnIndex, order);
-    db.studentTableModel->select();
+    int tabIndex = ui->tabWidget->currentIndex();
+    int columnIndex = db.studentTableModels[tabIndex]->fieldIndex(fieldName);
+    db.studentTableModels[tabIndex]->setSort(columnIndex, order);
+    db.studentTableModels[tabIndex]->select();
 }
-

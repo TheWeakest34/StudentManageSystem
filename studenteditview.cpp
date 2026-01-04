@@ -2,23 +2,24 @@
 #include "ui_studenteditview.h"
 #include "idatabase.h"
 #include <QMessageBox>
+#include <QDebug>
 
-StudentEditView::StudentEditView(QWidget *parent,int index)
+StudentEditView::StudentEditView(QWidget *parent,int index,int tabIndex)
     : QDialog(parent)
     , ui(new Ui::StudentEditView)
 {
     ui->setupUi(this);
 
     dataMapper = new QDataWidgetMapper();
+    curTabIndex = tabIndex;
     IDataBase &db = IDataBase::getInstance();
-    tableModel = db.studentTableModel;
+    tableModel = db.studentTableModels[curTabIndex];
 
     dataMapper->setModel(tableModel);
     dataMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
 
     dataMapper->addMapping(ui->ID,tableModel->fieldIndex("ID"));
     dataMapper->addMapping(ui->Name,tableModel->fieldIndex("Name"));
-    dataMapper->addMapping(ui->Sex,tableModel->fieldIndex("Sex"));
     dataMapper->addMapping(ui->Class,tableModel->fieldIndex("Class"));
     dataMapper->addMapping(ui->MathScore,tableModel->fieldIndex("MathScore"));
     dataMapper->addMapping(ui->CScore,tableModel->fieldIndex("CScore"));
@@ -26,6 +27,10 @@ StudentEditView::StudentEditView(QWidget *parent,int index)
     dataMapper->addMapping(ui->TotalScore,tableModel->fieldIndex("TotalScore"));
 
     dataMapper->setCurrentIndex(index);
+
+    int sexColumn = tableModel->fieldIndex("Sex");
+    QModelIndex sexIndex = tableModel->index(dataMapper->currentIndex(), sexColumn);
+    tableModel->setData(sexIndex, ui->Sex->currentText());
 }
 
 StudentEditView::~StudentEditView()
@@ -37,27 +42,27 @@ void StudentEditView::on_btSave_clicked()
 {
     IDataBase &db = IDataBase::getInstance();
     if(ui->ID->text().isEmpty()){
-        QMessageBox::information(this,"提示","学号不能为空！",QMessageBox::Ok);
-        db.revertStudentEdit();
+        QMessageBox::warning(this,"提示","学号不能为空！",QMessageBox::Ok);
+        db.revertStudentEdit(curTabIndex);
         return;
     }
     else if(ui->Name->text().isEmpty()){
-        QMessageBox::information(this,"提示","姓名不能为空！",QMessageBox::Ok);
-        db.revertStudentEdit();
+        QMessageBox::warning(this,"提示","姓名不能为空！",QMessageBox::Ok);
+        db.revertStudentEdit(curTabIndex);
         return;
     }
     else if(ui->Class->text().isEmpty()){
-        QMessageBox::information(this,"提示","班级不能为空！",QMessageBox::Ok);
-        db.revertStudentEdit();
+        QMessageBox::warning(this,"提示","班级不能为空！",QMessageBox::Ok);
+        db.revertStudentEdit(curTabIndex);
         return;
     }
 
-    db.submitStudentEdit();
+    db.submitStudentEdit(curTabIndex);
     this->close();
 }
 
 void StudentEditView::on_btCancel_clicked()
 {
-    IDataBase::getInstance().revertStudentEdit();
+    IDataBase::getInstance().revertStudentEdit(curTabIndex);
     this->close();
 }

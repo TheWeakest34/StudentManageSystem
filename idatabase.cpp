@@ -6,6 +6,8 @@
 IDataBase::IDataBase(QObject *parent) : QObject{parent}
 {
     initDataBase();
+    studentSelections.reserve(Max_Tabs);   // 预留容量，避免频繁扩容
+    studentTableModels.reserve(Max_Tabs);
 }
 
 void IDataBase::initDataBase()
@@ -59,65 +61,79 @@ QString IDataBase::userSignUp(QString userName, QString password, QString confir
     }
 }
 
+QSqlTableModel *IDataBase::getSqlTableModel(int index)
+{
+    return studentTableModels[index];
+}
+
+QItemSelectionModel *IDataBase::getItemSelectionModel(int index)
+{
+    return studentSelections[index];
+}
+
 bool IDataBase::initStudentModel()
 {
-    studentTableModel = new QSqlTableModel(this,database);
-    studentTableModel->setTable("Student");
-    studentTableModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    studentTableModel->setSort(studentTableModel->fieldIndex("ID"),Qt::AscendingOrder);
+    for(int i=0 ; i<3 ; i++){
+        QSqlTableModel *model = new QSqlTableModel(this,database);
+        model->setTable("exam" + QString::number(i+1));
+        model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+        model->setSort(model->fieldIndex("ID"),Qt::AscendingOrder);
 
-    if(!studentTableModel->select())
-        return false;
+        if(!model->select())
+            return false;
+        studentTableModels.push_back(model);
 
-    studentSelection = new QItemSelectionModel(studentTableModel);
+        QItemSelectionModel *selection = new QItemSelectionModel(model);
+        studentSelections.push_back(selection);
+    }
     return true;
 }
 
-bool IDataBase::searchStudent(QString filter)
+bool IDataBase::searchStudent(int index,QString filter)
 {
-    studentTableModel->setFilter(filter);
-    return studentTableModel->select();
+    studentTableModels[index]->setFilter(filter);
+    return studentTableModels[index]->select();
 }
 
-void IDataBase::deleteStudent()
+void IDataBase::deleteStudent(int index)
 {
-    QModelIndex currentIndex = studentSelection->currentIndex();
+    QModelIndex currentIndex = studentSelections[index]->currentIndex();
 
     //获取选中记录的学生姓名
     int row = currentIndex.row();
-    int column = studentTableModel->fieldIndex("Name");
-    QModelIndex index = studentTableModel->index(row,column);
-    QString Name = studentTableModel->data(index).toString();
+    int column = studentTableModels[index]->fieldIndex("Name");
+    QModelIndex nameIndex = studentTableModels[index]->index(row,column);
+    QString Name = studentTableModels[index]->data(nameIndex).toString();
 
     QMessageBox::StandardButton reply = QMessageBox::question(nullptr,"提示","确认要删除" + Name + "同学的信息吗？",
                                                               QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes){
-        studentTableModel->removeRow(currentIndex.row());
-        studentTableModel->submitAll();
-        studentTableModel->select();
+        studentTableModels[index]->removeRow(currentIndex.row());
+        studentTableModels[index]->submitAll();
+        studentTableModels[index]->select();
     }
     else
         return;
 }
 
-bool IDataBase::submitStudentEdit()
+bool IDataBase::submitStudentEdit(int index)
 {
-    return studentTableModel->submitAll();
+    return studentTableModels[index]->submitAll();
 }
 
-void IDataBase::revertStudentEdit()
+void IDataBase::revertStudentEdit(int index)
 {
-    studentTableModel->revertAll();
+    studentTableModels[index]->revertAll();
 }
 
-int IDataBase::addNewStudent()
+int IDataBase::addNewStudent(int index)
 {
-    studentTableModel->insertRow(studentTableModel->rowCount(),QModelIndex());
-    QModelIndex curIndex = studentTableModel->index(studentTableModel->rowCount() - 1,1);
+    studentTableModels[index]->insertRow(studentTableModels[index]->rowCount(),QModelIndex());
+    QModelIndex curIndex = studentTableModels[index]->index(studentTableModels[index]->rowCount() - 1,1);
 
     int curRecNo = curIndex.row();
-    QSqlRecord curRec = studentTableModel->record(curRecNo);
-    studentTableModel->setRecord(curRecNo,curRec);
+    QSqlRecord curRec = studentTableModels[index]->record(curRecNo);
+    studentTableModels[index]->setRecord(curRecNo,curRec);
 
     return curRecNo;
 }
