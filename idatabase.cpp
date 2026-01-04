@@ -1,6 +1,7 @@
 #include "idatabase.h"
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QMessageBox>
 
 IDataBase::IDataBase(QObject *parent) : QObject{parent}
 {
@@ -60,31 +61,64 @@ QString IDataBase::userSignUp(QString userName, QString password, QString confir
 
 bool IDataBase::initStudentModel()
 {
+    studentTableModel = new QSqlTableModel(this,database);
+    studentTableModel->setTable("Student");
+    studentTableModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    studentTableModel->setSort(studentTableModel->fieldIndex("ID"),Qt::AscendingOrder);
 
+    if(!studentTableModel->select())
+        return false;
+
+    studentSelection = new QItemSelectionModel(studentTableModel);
+    return true;
 }
 
 bool IDataBase::searchStudent(QString filter)
 {
-
+    studentTableModel->setFilter(filter);
+    return studentTableModel->select();
 }
 
 void IDataBase::deleteStudent()
 {
+    QModelIndex currentIndex = studentSelection->currentIndex();
 
+    //获取选中记录的学生姓名
+    int row = currentIndex.row();
+    int column = studentTableModel->fieldIndex("Name");
+    QModelIndex index = studentTableModel->index(row,column);
+    QString Name = studentTableModel->data(index).toString();
+
+    QMessageBox::StandardButton reply = QMessageBox::question(nullptr,"提示","确认要删除" + Name + "同学的信息吗？",
+                                                              QMessageBox::Yes | QMessageBox::No);
+    if(reply == QMessageBox::Yes){
+        studentTableModel->removeRow(currentIndex.row());
+        studentTableModel->submitAll();
+        studentTableModel->select();
+    }
+    else
+        return;
 }
 
 bool IDataBase::submitStudentEdit()
 {
-
+    return studentTableModel->submitAll();
 }
 
 void IDataBase::revertStudentEdit()
 {
-
+    studentTableModel->revertAll();
 }
 
 int IDataBase::addNewStudent()
 {
+    studentTableModel->insertRow(studentTableModel->rowCount(),QModelIndex());
+    QModelIndex curIndex = studentTableModel->index(studentTableModel->rowCount() - 1,1);
 
+    int curRecNo = curIndex.row();
+    QSqlRecord curRec = studentTableModel->record(curRecNo);
+    studentTableModel->setRecord(curRecNo,curRec);
+
+    return curRecNo;
 }
 

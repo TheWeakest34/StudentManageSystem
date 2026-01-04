@@ -9,7 +9,7 @@ SignUpView::SignUpView(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowFlag(Qt::FramelessWindowHint);
+    //this->setWindowFlag(Qt::FramelessWindowHint);
 }
 
 SignUpView::~SignUpView()
@@ -22,7 +22,6 @@ void SignUpView::on_btCancel_clicked()
     emit gotoLoginView();
     this->close();
 }
-
 
 void SignUpView::on_btSignUp_clicked()
 {

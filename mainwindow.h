@@ -19,6 +19,14 @@ public:
 private slots:
     void on_btEdit_clicked();
 
+    void on_btSearch_clicked();
+
+    void on_btAdd_clicked();
+
+    void on_btDelete_clicked();
+
+    void on_btOrder_clicked();
+
 private:
     Ui::MainWindow *ui;
     StudentEditView *studentEditView;

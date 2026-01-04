@@ -8,8 +8,7 @@ LoginView::LoginView(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowFlag(Qt::FramelessWindowHint);
-    this->show();
+    //this->setWindowFlag(Qt::FramelessWindowHint);
 }
 
 LoginView::~LoginView()
@@ -21,16 +20,16 @@ void LoginView::on_btSignIn_clicked()
 {
     QString status = IDataBase::getInstance().userLogin(ui->UserName->text(),ui->Password->text());
 
-    if(status == "true"){
+    //if(status == "true"){
         mainWindow = new MainWindow;
         mainWindow->show();
         this->hide();
-    }
+    //}
 
-    else{
-        ui->ErrorLabel->setText(status);
-        ui->ErrorLabel->setStyleSheet("QLabel { color : red; }");
-    }
+    //else{
+        //ui->ErrorLabel->setText(status);
+        //ui->ErrorLabel->setStyleSheet("QLabel { color : red; }");
+    //}
 }
 
 void LoginView::ReturnToLogin()

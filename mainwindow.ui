@@ -13,6 +13,14 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QTableView::item:selected {
+    background-color: rgb(100, 181, 246);
+}
+QTableView::item:selected:!focus {
+    background-color: rgb(187, 222, 251);
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
@@ -118,6 +126,16 @@
         <item>
          <property name="text">
           <string>学号</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>姓名</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>性别</string>
          </property>
         </item>
         <item>
