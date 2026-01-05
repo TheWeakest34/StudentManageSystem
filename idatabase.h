@@ -24,8 +24,9 @@ public:
     QString userLogin(QString userName,QString password);
     QString userSignUp(QString userName,QString password,QString confirmPassword);
 
+    int TableCount();
     bool initStudentModel();
-    bool initEmptyModel();
+    bool initNewModel(int index);
     bool searchStudent(int index,QString filter);
     void deleteStudent(int index);
     bool submitStudentEdit(int index);

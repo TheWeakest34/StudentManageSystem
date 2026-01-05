@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>600</height>
+    <width>1050</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,161 +22,179 @@ QTableView::item:selected:!focus {
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QGridLayout" name="gridLayout_8">
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLineEdit" name="SearchText">
-        <property name="placeholderText">
-         <string/>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>编辑</string>
         </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QLineEdit" name="SearchText">
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="SearchBy">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>160</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="currentText">
+            <string/>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <property name="placeholderText">
+            <string>-- 选择查询方式 --</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>姓名</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>学号</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>班级</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btSearch">
+           <property name="text">
+            <string>查询</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QPushButton" name="btAdd">
+           <property name="text">
+            <string>添加</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QPushButton" name="btDelete">
+           <property name="text">
+            <string>删除</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QPushButton" name="btEdit">
+           <property name="text">
+            <string>修改</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="SearchBy">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>160</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="currentText">
-         <string/>
-        </property>
-        <property name="currentIndex">
-         <number>-1</number>
-        </property>
-        <property name="placeholderText">
-         <string>-- 选择查询方式 --</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>姓名</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>学号</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>班级</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btSearch">
-        <property name="text">
-         <string>查询</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btAdd">
-        <property name="text">
-         <string>添加</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btDelete">
-        <property name="text">
-         <string>删除</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btEdit">
-        <property name="text">
-         <string>修改</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="OrderBy">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>160</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="currentIndex">
-         <number>-1</number>
-        </property>
-        <property name="placeholderText">
-         <string>-- 选择排序方式 --</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>学号</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>姓名</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>性别</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>班级</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>数学成绩</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>C语言成绩</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Java成绩</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>总分</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="AscOrDesc">
-        <property name="text">
-         <string>升序</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btOrder">
-        <property name="text">
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
          <string>排序</string>
         </property>
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="0">
+          <widget class="QComboBox" name="OrderBy">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>160</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <property name="placeholderText">
+            <string>-- 选择排序方式 --</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>学号</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>姓名</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>性别</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>班级</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>数学成绩</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>C语言成绩</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Java成绩</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>总分</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QRadioButton" name="AscOrDesc">
+           <property name="text">
+            <string>升序</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btOrder">
+           <property name="text">
+            <string>排序</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -184,132 +202,141 @@ QTableView::item:selected:!focus {
     <item row="1" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QComboBox" name="Class">
-        <property name="currentText">
-         <string/>
-        </property>
-        <property name="currentIndex">
-         <number>-1</number>
-        </property>
-        <property name="placeholderText">
-         <string>班级：</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>所有班级</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>01</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>02</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>03</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>04</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>05</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>06</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>07</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>08</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>09</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>10</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="Course">
-        <property name="currentIndex">
-         <number>-1</number>
-        </property>
-        <property name="placeholderText">
-         <string>课程：</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>所有课程</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>数学</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>C语言</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Java</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>分数范围</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="Min">
-        <property name="maximum">
-         <double>100.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="Max">
-        <property name="maximum">
-         <double>100.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>100.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="Filter">
-        <property name="text">
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
          <string>筛选</string>
         </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QComboBox" name="Class">
+           <property name="currentText">
+            <string/>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <property name="placeholderText">
+            <string>班级：</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>所有班级</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>01</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>02</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>03</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>04</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>05</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>06</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>07</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>08</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>09</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>10</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="Course">
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <property name="placeholderText">
+            <string>课程：</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>所有课程</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>数学</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>C语言</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Java</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>分数范围</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QDoubleSpinBox" name="Min">
+           <property name="maximum">
+            <double>100.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QDoubleSpinBox" name="Max">
+           <property name="maximum">
+            <double>100.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>100.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QPushButton" name="Filter">
+           <property name="text">
+            <string>筛选</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -326,10 +353,26 @@ QTableView::item:selected:!focus {
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="addNewTab">
-        <property name="text">
-         <string>添加新页面</string>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="title">
+         <string>页面</string>
         </property>
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>删除页面</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="addNewTab">
+           <property name="text">
+            <string>添加新页面</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -340,7 +383,7 @@ QTableView::item:selected:!focus {
        <enum>QTabWidget::TabPosition::South</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab1">
        <attribute name="title">
@@ -381,7 +424,7 @@ QTableView::item:selected:!focus {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1050</width>
      <height>24</height>
     </rect>
    </property>
@@ -389,6 +432,8 @@ QTableView::item:selected:!focus {
     <property name="title">
      <string>文件</string>
     </property>
+    <addaction name="Import"/>
+    <addaction name="Export"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -405,6 +450,28 @@ QTableView::item:selected:!focus {
    <addaction name="menu_3"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="Import">
+   <property name="text">
+    <string>导入</string>
+   </property>
+   <property name="toolTip">
+    <string>导入</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="Export">
+   <property name="text">
+    <string>导出</string>
+   </property>
+   <property name="toolTip">
+    <string>导出</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

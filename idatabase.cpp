@@ -62,6 +62,22 @@ QString IDataBase::userSignUp(QString userName, QString password, QString confir
     }
 }
 
+int IDataBase::TableCount()
+{
+    for(int i=0 ; i<10 ; i++){
+        QString tableName = QString("exam%1").arg(i+1);
+        QSqlQuery query;
+        QString sql = QString("select count(*) from %1").arg(tableName);
+        query.exec(sql);
+
+        if(query.next() && query.value(0).toInt() > 0){
+            continue;
+        }
+        return i+1;
+    }
+    return 10;
+}
+
 bool IDataBase::initStudentModel()
 {
     for(int i=0 ; i<3 ; i++){
@@ -80,10 +96,10 @@ bool IDataBase::initStudentModel()
     return true;
 }
 
-bool IDataBase::initEmptyModel()
+bool IDataBase::initNewModel(int index)
 {
     QSqlTableModel *model = new QSqlTableModel(this,database);
-    model->setTable("empty");
+    model->setTable("exam" + QString::number(index+1));
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->setSort(model->fieldIndex("ID"),Qt::AscendingOrder);
 

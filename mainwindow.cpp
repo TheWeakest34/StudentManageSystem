@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 #include "idatabase.h"
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QSqlRecord>
+#include <QSqlError>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -139,7 +142,7 @@ void MainWindow::on_Filter_clicked()
     QString course = ui->Course->currentText();
     QString Min = ui->Min->text();
     QString Max = ui->Max->text();
-    QString range = QString("BETWEEN %1 AND %2").arg(Min).arg(Max);
+    QString range = QString("BETWEEN %1 AND %2").arg(Min,Max);
     QString filter;
 
     if(!Class.isEmpty() && Class != "所有班级")
@@ -166,11 +169,88 @@ void MainWindow::on_addNewTab_clicked()
     initTableView(newTable);
 
     IDataBase &db = IDataBase::getInstance();
-    if(db.initEmptyModel()){
+    if(db.initNewModel(count)){
         newTable->setModel(db.studentTableModels[count]);
         newTable->setSelectionModel(db.studentSelections[count]);
     }
-    ui->tabWidget->addTab(newTable,tabName);
+
+    QWidget *tabContainer = new QWidget(this);   //创建布局
+    QVBoxLayout *tabLayout = new QVBoxLayout(tabContainer);
+    tabLayout->addWidget(newTable);
+
+    ui->tabWidget->addTab(tabContainer,tabName);
     ui->tabWidget->setCurrentIndex(count);
 }
 
+void MainWindow::on_Import_triggered()
+{
+    QString filePath = QFileDialog::getOpenFileName(this,"选择CSV文件",
+                                                    QDir::currentPath(),"CSV 文件 (*.csv)");
+    if (filePath.isEmpty()) {
+        return;
+    }
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "错误", "无法打开文件: " + filePath);
+        return;
+    }
+
+    // 获取当前标签页索引及对应的数据模型
+    int tabIndex = ui->tabWidget->currentIndex();
+    IDataBase &db = IDataBase::getInstance();
+    QSqlTableModel *model = db.studentTableModels[tabIndex];
+
+    QTextStream in(&file);
+    QStringList headers;
+
+    while (!in.atEnd()) {
+        QString line = in.readLine().trimmed();
+        if (line.isEmpty()) continue;   //跳过空行
+
+        // 分割CSV字段（处理带引号的字段）
+        QStringList fields;
+        QString currentField;
+        bool inQuotes = false;
+
+        for (int i = 0; i < line.length(); ++i) {
+            QChar c = line[i];
+            if (c == '"')
+                inQuotes = !inQuotes;
+            else if (c == ',' && !inQuotes) {
+                fields.append(currentField.trimmed());
+                currentField.clear();
+            }
+            else
+                currentField += c;
+        }
+        fields.append(currentField.trimmed());
+
+        if (headers.isEmpty()) {
+            headers = fields;
+            continue;
+        }
+
+        // 创建新记录并填充数据
+        QSqlRecord record = model->record();
+        for (int i = 0; i < headers.size(); i++) {
+            QString fieldName = headers[i]; // 从CSV表头获取字段名
+            qDebug()<<fieldName;
+            QString fieldValue = fields[i];
+
+            if(fieldValue.startsWith('\'') && fieldValue.length() > 1)   //处理以单引号开头的数字串
+                fieldValue = fieldValue.mid(1);
+
+            int colIndex = model->fieldIndex(fieldName); // 匹配表格模型中的字段
+            if (fieldName.contains("Score", Qt::CaseInsensitive)) {
+                double score = fieldValue.toDouble();   //将成绩转化为数字
+                record.setValue(colIndex,score);
+            }
+            else
+                record.setValue(colIndex, fieldValue);
+        }
+        model->insertRecord(-1, record);
+    }
+    model->submitAll();
+    file.close();
+}

@@ -34,6 +34,8 @@ private slots:
 
     void on_addNewTab_clicked();
 
+    void on_Import_triggered();
+
 private:
     Ui::MainWindow *ui;
     StudentEditView *studentEditView;
