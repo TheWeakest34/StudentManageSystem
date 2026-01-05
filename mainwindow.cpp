@@ -157,3 +157,20 @@ void MainWindow::on_Filter_clicked()
     IDataBase::getInstance().searchStudent(tabIndex,filter);
 }
 
+void MainWindow::on_addNewTab_clicked()
+{
+    int count = ui->tabWidget->count();
+    QString tabName = QString("第%1次考试").arg(count+1);
+
+    QTableView *newTable = new QTableView(this);
+    initTableView(newTable);
+
+    IDataBase &db = IDataBase::getInstance();
+    if(db.initEmptyModel()){
+        newTable->setModel(db.studentTableModels[count]);
+        newTable->setSelectionModel(db.studentSelections[count]);
+    }
+    ui->tabWidget->addTab(newTable,tabName);
+    ui->tabWidget->setCurrentIndex(count);
+}
+

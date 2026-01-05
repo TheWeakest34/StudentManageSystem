@@ -34,6 +34,7 @@ void SignUpView::on_btSignUp_clicked()
     if(status == "true"){
         QMessageBox::information(this,"成功","注册成功！",QMessageBox::Ok);
         emit gotoLoginView();
+        this->close();
     }
     else{   //显示错误信息
         ui->ErrorLabel->setText(status);

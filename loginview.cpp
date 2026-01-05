@@ -23,7 +23,7 @@ void LoginView::on_btSignIn_clicked()
     //if(status == "true"){
         mainWindow = new MainWindow;
         mainWindow->show();
-        this->hide();
+        this->close();
     //}
 
     //else{
@@ -44,6 +44,6 @@ void LoginView::on_btSignUp_clicked()
     signUpView->show();
     this->hide();
 
-    connect(signUpView,SIGNAL(gotoLoginView()),this,SLOT(ReturnToLogin()));
+    connect(signUpView,&SignUpView::gotoLoginView,this,&LoginView::ReturnToLogin);
 }
 

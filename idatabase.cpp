@@ -2,6 +2,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QMessageBox>
+#include <QCoreApplication>
 
 IDataBase::IDataBase(QObject *parent) : QObject{parent}
 {
@@ -13,7 +14,7 @@ IDataBase::IDataBase(QObject *parent) : QObject{parent}
 void IDataBase::initDataBase()
 {
     database = QSqlDatabase::addDatabase("QSQLITE");
-    QString aFile = "C://Users//32788//Desktop//作业//Qt//FinalLab.db";
+    QString aFile = QCoreApplication::applicationDirPath() + "/FinalLab.db";
     database.setDatabaseName(aFile);
     database.open();
 }
@@ -76,6 +77,23 @@ bool IDataBase::initStudentModel()
         QItemSelectionModel *selection = new QItemSelectionModel(model);
         studentSelections.push_back(selection);
     }
+    return true;
+}
+
+bool IDataBase::initEmptyModel()
+{
+    QSqlTableModel *model = new QSqlTableModel(this,database);
+    model->setTable("empty");
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setSort(model->fieldIndex("ID"),Qt::AscendingOrder);
+
+    if(!model->select())
+        return false;
+    studentTableModels.push_back(model);
+
+    QItemSelectionModel *selection = new QItemSelectionModel(model);
+    studentSelections.push_back(selection);
+
     return true;
 }
 

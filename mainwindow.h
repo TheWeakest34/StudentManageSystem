@@ -32,6 +32,8 @@ private slots:
 
     void on_Filter_clicked();
 
+    void on_addNewTab_clicked();
+
 private:
     Ui::MainWindow *ui;
     StudentEditView *studentEditView;

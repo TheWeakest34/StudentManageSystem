@@ -325,6 +325,13 @@ QTableView::item:selected:!focus {
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QPushButton" name="addNewTab">
+        <property name="text">
+         <string>添加新页面</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="2" column="0">
@@ -337,7 +344,7 @@ QTableView::item:selected:!focus {
       </property>
       <widget class="QWidget" name="tab1">
        <attribute name="title">
-        <string>第一次考试</string>
+        <string>第1次考试</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -347,7 +354,7 @@ QTableView::item:selected:!focus {
       </widget>
       <widget class="QWidget" name="tab2">
        <attribute name="title">
-        <string>第二次考试</string>
+        <string>第2次考试</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
@@ -357,7 +364,7 @@ QTableView::item:selected:!focus {
       </widget>
       <widget class="QWidget" name="tab3">
        <attribute name="title">
-        <string>第三次考试</string>
+        <string>第3次考试</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
