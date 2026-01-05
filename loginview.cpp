@@ -35,6 +35,7 @@ void LoginView::on_btSignIn_clicked()
 void LoginView::ReturnToLogin()
 {
     this->show();
+    ui->UserName->setFocus();
 }
 
 void LoginView::on_btSignUp_clicked()

@@ -24,9 +24,6 @@ public:
     QString userLogin(QString userName,QString password);
     QString userSignUp(QString userName,QString password,QString confirmPassword);
 
-    QSqlTableModel *getSqlTableModel(int index);   //通过下标索引来获取模型
-    QItemSelectionModel *getItemSelectionModel(int index);
-
     bool initStudentModel();
     bool searchStudent(int index,QString filter);
     void deleteStudent(int index);

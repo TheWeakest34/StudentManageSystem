@@ -61,16 +61,6 @@ QString IDataBase::userSignUp(QString userName, QString password, QString confir
     }
 }
 
-QSqlTableModel *IDataBase::getSqlTableModel(int index)
-{
-    return studentTableModels[index];
-}
-
-QItemSelectionModel *IDataBase::getItemSelectionModel(int index)
-{
-    return studentSelections[index];
-}
-
 bool IDataBase::initStudentModel()
 {
     for(int i=0 ; i<3 ; i++){
