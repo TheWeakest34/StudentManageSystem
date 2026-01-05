@@ -132,3 +132,28 @@ void MainWindow::on_btOrder_clicked()
     db.studentTableModels[tabIndex]->setSort(columnIndex, order);
     db.studentTableModels[tabIndex]->select();
 }
+
+void MainWindow::on_Filter_clicked()
+{
+    QString Class = ui->Class->currentText();
+    QString course = ui->Course->currentText();
+    QString Min = ui->Min->text();
+    QString Max = ui->Max->text();
+    QString range = QString("BETWEEN %1 AND %2").arg(Min).arg(Max);
+    QString filter;
+
+    if(!Class.isEmpty() && Class != "所有班级")
+        filter = QString("Class = '%1' AND ").arg(Class);
+    if(course == "数学")
+        filter.append("MathScore " + range);
+    else if(course == "C语言")
+        filter.append("CScore " + range);
+    else if(course == "Java")
+        filter.append("JavaScore " + range);
+    else
+        filter.append("MathScore " + range + " AND CScore " + range + " AND JavaScore " + range);
+
+    int tabIndex = ui->tabWidget->currentIndex();
+    IDataBase::getInstance().searchStudent(tabIndex,filter);
+}
+

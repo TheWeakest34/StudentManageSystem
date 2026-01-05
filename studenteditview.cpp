@@ -2,7 +2,6 @@
 #include "ui_studenteditview.h"
 #include "idatabase.h"
 #include <QMessageBox>
-#include <QDebug>
 
 StudentEditView::StudentEditView(QWidget *parent,int index,int tabIndex)
     : QDialog(parent)

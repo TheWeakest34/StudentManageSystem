@@ -30,6 +30,8 @@ private slots:
 
     void initTableView(QTableView *tableview);
 
+    void on_Filter_clicked();
+
 private:
     Ui::MainWindow *ui;
     StudentEditView *studentEditView;
