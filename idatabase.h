@@ -21,15 +21,10 @@ public:
         return instance;
     }
 
-    const QSqlDatabase& getDatabase() const {
-        return database;
-    }
-
     QString userLogin(QString userName,QString password);
     QString userSignUp(QString userName,QString password,QString confirmPassword);
 
     int TableCount();
-    bool initStudentModel();
     bool initNewModel(int index);
     bool searchStudent(int index,QString filter);
     void deleteStudent(int index);

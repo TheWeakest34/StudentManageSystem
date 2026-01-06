@@ -66,3 +66,32 @@ void StudentEditView::on_btCancel_clicked()
     IDataBase::getInstance().revertStudentEdit(curTabIndex);
     this->close();
 }
+
+void StudentEditView::ScoreChanged()
+{
+    double math = ui->MathScore->text().toDouble();
+    double c = ui->CScore->text().toDouble();
+    double java = ui->JavaScore->text().toDouble();
+    double total = math + c + java;
+    ui->TotalScore->setText(QString::number(total));   //自动填充总分
+}
+
+void StudentEditView::on_MathScore_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    ScoreChanged();
+}
+
+
+void StudentEditView::on_CScore_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    ScoreChanged();
+}
+
+
+void StudentEditView::on_JavaScore_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    ScoreChanged();
+}

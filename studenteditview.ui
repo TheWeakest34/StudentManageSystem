@@ -154,16 +154,20 @@
         <widget class="QLineEdit" name="Class"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="MathScore"/>
+        <widget class="QDoubleSpinBox" name="MathScore"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="CScore"/>
+        <widget class="QDoubleSpinBox" name="CScore"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="JavaScore"/>
+        <widget class="QDoubleSpinBox" name="JavaScore"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="TotalScore"/>
+        <widget class="QLineEdit" name="TotalScore">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

@@ -23,6 +23,14 @@ private slots:
 
     void on_btCancel_clicked();
 
+    void on_MathScore_textChanged(const QString &arg1);
+
+    void on_CScore_textChanged(const QString &arg1);
+
+    void on_JavaScore_textChanged(const QString &arg1);
+
+    void ScoreChanged();
+
 private:
     Ui::StudentEditView *ui;
     QDataWidgetMapper *dataMapper;

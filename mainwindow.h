@@ -36,6 +36,12 @@ private slots:
 
     void initTableView(QTableView *tableview);
 
+    void on_Export_triggered();
+
+    void on_CloseTab_clicked();
+
+    QString formatCsvLine(const QStringList &fields);
+
 private:
     Ui::MainWindow *ui;
     StudentEditView *studentEditView;

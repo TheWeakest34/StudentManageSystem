@@ -6,6 +6,7 @@
 #include <QSqlRecord>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QTextStream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+     delete studentEditView;
 }
 
 void MainWindow::initTableView(QTableView *tableview)
@@ -171,6 +173,17 @@ void MainWindow::on_addNewTab_clicked()
     ui->tabWidget->setCurrentIndex(count);
 }
 
+void MainWindow::on_CloseTab_clicked()
+{
+    int index = ui->tabWidget->currentIndex();
+    IDataBase &db = IDataBase::getInstance();
+    db.studentTableModels.remove(index);
+    db.studentSelections.remove(index);
+    QWidget *tab = ui->tabWidget->widget(index);
+    ui->tabWidget->removeTab(index);
+    delete tab;
+}
+
 void MainWindow::on_Import_triggered()
 {
     QString filePath = QFileDialog::getOpenFileName(this,"选择CSV文件",
@@ -241,4 +254,77 @@ void MainWindow::on_Import_triggered()
     }
     model->submitAll();
     file.close();
+    QMessageBox::information(this, "成功", "导入成功" + filePath, QMessageBox::Ok);
+}
+
+void MainWindow::on_Export_triggered()
+{
+    QString filePath = QFileDialog::getSaveFileName(this,"导出CSV文件",QDir::currentPath() +
+                                                    "/成绩导出.csv","CSV 文件 (*.csv);;所有文件 (*.*)");
+    if (filePath.isEmpty())
+        return;
+
+    //获取当前标签页的模型
+    int tabIndex = ui->tabWidget->currentIndex();
+    IDataBase &db = IDataBase::getInstance();
+    QSqlTableModel *model = db.studentTableModels[tabIndex];
+    if (!model || model->rowCount() == 0) {
+        QMessageBox::warning(this, "提示", "当前标签页无数据可导出！", QMessageBox::Ok);
+        return;
+    }
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "错误", "无法写入文件: " + filePath + "\n" + file.errorString());
+        return;
+    }
+    QTextStream out(&file);
+    out.setEncoding(QStringConverter::Utf8);
+    out << "\xEF\xBB\xBF";
+
+    //写入表头
+    QStringList headerLine;
+    for (int col = 0; col < model->columnCount(); col++) {
+        QString fieldName = model->headerData(col, Qt::Horizontal).toString();
+        headerLine.append(fieldName);
+    }
+    out << formatCsvLine(headerLine) << "\n";
+
+    //写入数据行
+    for (int row = 0; row < model->rowCount(); row++) {
+        QStringList dataLine;
+        for (int col = 0; col < model->columnCount(); col++) {
+            QVariant cellValue = model->data(model->index(row, col));
+            QString valueStr = cellValue.toString();
+
+            // 成绩字段格式化
+            QString fieldName = model->headerData(col, Qt::Horizontal).toString();
+            if (fieldName == "MathScore" || fieldName == "CScore" ||
+                fieldName == "JavaScore" || fieldName == "TotalScore") {
+                double score = cellValue.toDouble();
+                valueStr = QString::number(score, 'g', 5);
+            }
+
+            dataLine.append(valueStr);
+        }
+        out << formatCsvLine(dataLine) << "\n";
+    }
+
+    file.close();
+    QMessageBox::information(this, "成功", "数据已导出至：\n" + filePath, QMessageBox::Ok);
+}
+
+QString MainWindow::formatCsvLine(const QStringList &fields)
+{
+    QStringList formattedFields;
+    for (const QString &field : fields) {
+        QString processed = field;
+        //替换双引号为两个双引号（CSV转义规则）
+        processed.replace("\"", "\"\"");
+        //若包含逗号/换行符/双引号，整体加双引号
+        if (processed.contains(',') || processed.contains('\n') || processed.contains('"'))
+            processed = "\"" + processed + "\"";
+        formattedFields.append(processed);
+    }
+    return formattedFields.join(",");
 }

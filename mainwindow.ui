@@ -118,10 +118,17 @@ QTableView::item:selected:!focus {
          <string>页面</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_7">
-         <item row="0" column="0">
+         <item row="0" column="1">
           <widget class="QPushButton" name="addNewTab">
            <property name="text">
             <string>添加新页面</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="CloseTab">
+           <property name="text">
+            <string>关闭页面</string>
            </property>
           </widget>
          </item>
