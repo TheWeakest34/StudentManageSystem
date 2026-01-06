@@ -64,7 +64,7 @@ QString IDataBase::userSignUp(QString userName, QString password, QString confir
 
 int IDataBase::TableCount()
 {
-    for(int i=0 ; i<10 ; i++){
+    for(int i=0 ; i<Max_Tabs ; i++){
         QString tableName = QString("exam%1").arg(i+1);
         QSqlQuery query;
         QString sql = QString("select count(*) from %1").arg(tableName);
@@ -73,27 +73,9 @@ int IDataBase::TableCount()
         if(query.next() && query.value(0).toInt() > 0){
             continue;
         }
-        return i+1;
+        return i;
     }
-    return 10;
-}
-
-bool IDataBase::initStudentModel()
-{
-    for(int i=0 ; i<3 ; i++){
-        QSqlTableModel *model = new QSqlTableModel(this,database);
-        model->setTable("exam" + QString::number(i+1));
-        model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-        model->setSort(model->fieldIndex("ID"),Qt::AscendingOrder);
-
-        if(!model->select())
-            return false;
-        studentTableModels.push_back(model);
-
-        QItemSelectionModel *selection = new QItemSelectionModel(model);
-        studentSelections.push_back(selection);
-    }
-    return true;
+    return Max_Tabs;
 }
 
 bool IDataBase::initNewModel(int index)
@@ -129,7 +111,7 @@ void IDataBase::deleteStudent(int index)
     QModelIndex nameIndex = studentTableModels[index]->index(row,column);
     QString Name = studentTableModels[index]->data(nameIndex).toString();
 
-    QMessageBox::StandardButton reply = QMessageBox::question(nullptr,"提示","确认要删除" + Name + "同学的信息吗？",
+    QMessageBox::StandardButton reply = QMessageBox::question(nullptr,"提示","确认要删除「" + Name + "」同学的信息吗？",
                                                               QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes){
         studentTableModels[index]->removeRow(currentIndex.row());

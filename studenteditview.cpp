@@ -20,6 +20,7 @@ StudentEditView::StudentEditView(QWidget *parent,int index,int tabIndex)
     dataMapper->addMapping(ui->ID,tableModel->fieldIndex("ID"));
     dataMapper->addMapping(ui->Name,tableModel->fieldIndex("Name"));
     dataMapper->addMapping(ui->Class,tableModel->fieldIndex("Class"));
+    dataMapper->addMapping(ui->Sex,tableModel->fieldIndex("Sex"));
     dataMapper->addMapping(ui->MathScore,tableModel->fieldIndex("MathScore"));
     dataMapper->addMapping(ui->CScore,tableModel->fieldIndex("CScore"));
     dataMapper->addMapping(ui->JavaScore,tableModel->fieldIndex("JavaScore"));

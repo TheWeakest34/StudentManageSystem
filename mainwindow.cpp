@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QSqlRecord>
 #include <QSqlError>
+#include <QSqlQuery>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,21 +13,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    initTableView(ui->tableView);
-    initTableView(ui->tableView2);
-    initTableView(ui->tableView3);
-
     IDataBase &db = IDataBase::getInstance();
-    if(db.initStudentModel()){
-        ui->tableView->setModel(db.studentTableModels[0]);
-        ui->tableView->setSelectionModel(db.studentSelections[0]);
-
-        ui->tableView2->setModel(db.studentTableModels[1]);
-        ui->tableView2->setSelectionModel(db.studentSelections[1]);
-
-        ui->tableView3->setModel(db.studentTableModels[2]);
-        ui->tableView3->setSelectionModel(db.studentSelections[2]);
-    }
+    for(int i=0 ; i<db.TableCount() ; i++)   //数据库中有多少个非空表就创建多少个页面
+        on_addNewTab_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -235,7 +224,6 @@ void MainWindow::on_Import_triggered()
         QSqlRecord record = model->record();
         for (int i = 0; i < headers.size(); i++) {
             QString fieldName = headers[i]; // 从CSV表头获取字段名
-            qDebug()<<fieldName;
             QString fieldValue = fields[i];
 
             if(fieldValue.startsWith('\'') && fieldValue.length() > 1)   //处理以单引号开头的数字串

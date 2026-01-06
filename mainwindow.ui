@@ -22,7 +22,7 @@ QTableView::item:selected:!focus {
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_8">
+   <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -31,10 +31,24 @@ QTableView::item:selected:!focus {
          <string>编辑</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btSearch">
+           <property name="text">
+            <string>查询</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="0">
           <widget class="QLineEdit" name="SearchText">
            <property name="placeholderText">
             <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QPushButton" name="btEdit">
+           <property name="text">
+            <string>修改</string>
            </property>
           </widget>
          </item>
@@ -81,10 +95,10 @@ QTableView::item:selected:!focus {
            </item>
           </widget>
          </item>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="btSearch">
+         <item row="0" column="4">
+          <widget class="QPushButton" name="btDelete">
            <property name="text">
-            <string>查询</string>
+            <string>删除</string>
            </property>
           </widget>
          </item>
@@ -95,102 +109,19 @@ QTableView::item:selected:!focus {
            </property>
           </widget>
          </item>
-         <item row="0" column="4">
-          <widget class="QPushButton" name="btDelete">
-           <property name="text">
-            <string>删除</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="QPushButton" name="btEdit">
-           <property name="text">
-            <string>修改</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_3">
+       <widget class="QGroupBox" name="groupBox_4">
         <property name="title">
-         <string>排序</string>
+         <string>页面</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_6">
+        <layout class="QGridLayout" name="gridLayout_7">
          <item row="0" column="0">
-          <widget class="QComboBox" name="OrderBy">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>160</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-           <property name="placeholderText">
-            <string>-- 选择排序方式 --</string>
-           </property>
-           <item>
-            <property name="text">
-             <string>学号</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>姓名</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>性别</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>班级</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>数学成绩</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>C语言成绩</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Java成绩</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>总分</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QRadioButton" name="AscOrDesc">
+          <widget class="QPushButton" name="addNewTab">
            <property name="text">
-            <string>升序</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="btOrder">
-           <property name="text">
-            <string>排序</string>
+            <string>添加新页面</string>
            </property>
           </widget>
          </item>
@@ -353,23 +284,85 @@ QTableView::item:selected:!focus {
        </spacer>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_4">
+       <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
-         <string>页面</string>
+         <string>排序</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_7">
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton">
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="1">
+          <widget class="QRadioButton" name="AscOrDesc">
            <property name="text">
-            <string>删除页面</string>
+            <string>升序</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="addNewTab">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="btOrder">
            <property name="text">
-            <string>添加新页面</string>
+            <string>排序</string>
            </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QComboBox" name="OrderBy">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>160</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <property name="placeholderText">
+            <string>-- 选择排序方式 --</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>学号</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>姓名</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>性别</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>班级</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>数学成绩</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>C语言成绩</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Java成绩</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>总分</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
@@ -383,38 +376,8 @@ QTableView::item:selected:!focus {
        <enum>QTabWidget::TabPosition::South</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>-1</number>
       </property>
-      <widget class="QWidget" name="tab1">
-       <attribute name="title">
-        <string>第1次考试</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QTableView" name="tableView"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab2">
-       <attribute name="title">
-        <string>第2次考试</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QTableView" name="tableView2"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab3">
-       <attribute name="title">
-        <string>第3次考试</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="QTableView" name="tableView3"/>
-        </item>
-       </layout>
-      </widget>
      </widget>
     </item>
    </layout>

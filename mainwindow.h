@@ -28,13 +28,13 @@ private slots:
 
     void on_btOrder_clicked();
 
-    void initTableView(QTableView *tableview);
-
     void on_Filter_clicked();
 
     void on_addNewTab_clicked();
 
     void on_Import_triggered();
+
+    void initTableView(QTableView *tableview);
 
 private:
     Ui::MainWindow *ui;
