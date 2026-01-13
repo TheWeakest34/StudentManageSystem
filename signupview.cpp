@@ -19,7 +19,7 @@ SignUpView::~SignUpView()
 
 void SignUpView::on_btCancel_clicked()
 {
-    emit gotoLoginView();
+    emit gotoLoginView("","");
     this->close();
 }
 
@@ -33,7 +33,7 @@ void SignUpView::on_btSignUp_clicked()
 
     if(status == "true"){
         QMessageBox::information(this,"成功","注册成功！",QMessageBox::Ok);
-        emit gotoLoginView();
+        emit gotoLoginView(userName,password);
         this->close();
     }
     else{   //显示错误信息

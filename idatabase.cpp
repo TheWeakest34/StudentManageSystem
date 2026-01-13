@@ -105,6 +105,11 @@ void IDataBase::deleteStudent(int index)
 {
     QModelIndex currentIndex = studentSelections[index]->currentIndex();
 
+    if(currentIndex.row() < 0){
+        QMessageBox::warning(nullptr,"提示","请先选择一行!",QMessageBox::Ok);
+        return;
+    }
+
     //获取选中记录的学生姓名
     int row = currentIndex.row();
     int column = studentTableModels[index]->fieldIndex("Name");
@@ -142,5 +147,60 @@ int IDataBase::addNewStudent(int index)
     studentTableModels[index]->setRecord(curRecNo,curRec);
 
     return curRecNo;
+}
+
+IDataBase::ScoreStat IDataBase::getStatistics(int tabIndex, QString subject)
+{
+    ScoreStat stat;
+    QString tableName = "exam" + QString::number(tabIndex + 1);
+    QSqlQuery query;
+    QString sql;
+
+    QString fieldName;
+    if(subject == "数学")
+        fieldName = "MathScore";
+    else if(subject == "C语言")
+        fieldName = "CScore";
+    else if(subject == "Java")
+        fieldName = "JavaScore";
+    else if(subject == "全科")
+        fieldName = "TotalScore";
+
+    if(fieldName == "TotalScore")
+        sql = QString(
+                          "SELECT "
+                          "COUNT(*) as total, "
+                          "AVG(%1) as avg, "
+                          "MAX(%1) as max, "
+                          "MIN(%1) as min, "
+                          "SUM(CASE WHEN %1 >= 180 THEN 1 ELSE 0 END) as pass, "
+                          "SUM(CASE WHEN %1 >= 255 THEN 1 ELSE 0 END) as excellent, "
+                          "FROM %2"
+                          ).arg(fieldName, tableName);
+    else
+        sql = QString(
+                  "SELECT "
+                  "COUNT(*) as total, "
+                  "AVG(%1) as avg, "
+                  "MAX(%1) as max, "
+                  "MIN(%1) as min, "
+                  "SUM(CASE WHEN %1 >= 60 THEN 1 ELSE 0 END) as pass, "
+                  "SUM(CASE WHEN %1 >= 85 THEN 1 ELSE 0 END) as excellent, "
+                  "FROM %2"
+                  ).arg(fieldName, tableName);
+
+    if(query.exec(sql)) {
+        if(query.next()) {
+            stat.totalCount = query.value("total").toInt();
+            stat.avg = query.value("avg").toDouble();
+            stat.max = query.value("max").toDouble();
+            stat.min = query.value("min").toDouble();
+
+            //计算及格率和优秀率
+            stat.passRate = (double) query.value("pass").toInt() / stat.totalCount;
+            stat.excellentRate = (double) query.value("excellent").toInt() / stat.totalCount;
+        }
+    }
+    return stat;
 }
 

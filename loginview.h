@@ -19,14 +19,14 @@ public:
 
 private slots:
     void on_btSignIn_clicked();
-    void ReturnToLogin();
+    void ReturnToLogin(QString userName,QString password);
 
     void on_btSignUp_clicked();
 
 private:
     Ui::LoginView *ui;
-    SignUpView *signUpView;
-    MainWindow *mainWindow;
+    SignUpView *signUpView = nullptr;
+    MainWindow *mainWindow = nullptr;
 };
 
 #endif // LOGINVIEW_H

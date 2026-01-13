@@ -9,6 +9,8 @@ StudentEditView::StudentEditView(QWidget *parent,int index,int tabIndex)
 {
     ui->setupUi(this);
 
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
     dataMapper = new QDataWidgetMapper();
     curTabIndex = tabIndex;
     IDataBase &db = IDataBase::getInstance();

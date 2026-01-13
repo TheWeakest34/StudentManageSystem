@@ -22,7 +22,7 @@ private slots:
     void on_btSignUp_clicked();
 
 signals:
-    void gotoLoginView();
+    void gotoLoginView(QString userName,QString password);
 
 private:
     Ui::SignUpView *ui;

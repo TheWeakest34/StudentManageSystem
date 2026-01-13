@@ -24,6 +24,15 @@ public:
     QString userLogin(QString userName,QString password);
     QString userSignUp(QString userName,QString password,QString confirmPassword);
 
+    struct ScoreStat {
+        double avg;         // 平均分
+        double max;         // 最高分
+        double min;         // 最低分
+        double passRate;    // 及格率（%）
+        double excellentRate; // 优秀率（%）
+        int totalCount;     // 总人数
+    };
+
     int TableCount();
     bool initNewModel(int index);
     bool searchStudent(int index,QString filter);
@@ -31,6 +40,7 @@ public:
     bool submitStudentEdit(int index);
     void revertStudentEdit(int index);
     int addNewStudent(int index);
+    ScoreStat getStatistics(int tabIndex,QString subject);
 
 private:
     explicit IDataBase(QObject *parent = nullptr);

@@ -34,15 +34,18 @@ void LoginView::on_btSignIn_clicked()
     //}
 }
 
-void LoginView::ReturnToLogin()
+void LoginView::ReturnToLogin(QString userName,QString password)
 {
     this->show();
     ui->UserName->setFocus();
+    ui->UserName->setText(userName);
+    ui->Password->setText(password);
 }
 
 void LoginView::on_btSignUp_clicked()
 {
-    signUpView = new SignUpView;
+    if(signUpView == nullptr)   //防止用户多次点击注册和取消而导致重复创建
+        signUpView = new SignUpView;
     signUpView->show();
     this->hide();
 

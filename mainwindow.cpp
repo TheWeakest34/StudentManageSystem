@@ -328,3 +328,11 @@ QString MainWindow::formatCsvLine(const QStringList &fields)
     }
     return formattedFields.join(",");
 }
+
+void MainWindow::on_scoreStatistics_triggered()
+{
+    int tabIndex = ui->tabWidget->currentIndex();
+    statisticView = new StatisticView(this,tabIndex);
+    statisticView->show();
+}
+

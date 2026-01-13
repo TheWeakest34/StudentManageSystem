@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "studenteditview.h"
 #include <QTableView>
+#include "statisticview.h"
 
 namespace Ui {
 class MainWindow;
@@ -42,9 +43,12 @@ private slots:
 
     QString formatCsvLine(const QStringList &fields);
 
+    void on_scoreStatistics_triggered();
+
 private:
     Ui::MainWindow *ui;
-    StudentEditView *studentEditView;
+    StudentEditView *studentEditView = nullptr;
+    StatisticView *statisticView = nullptr;
 };
 
 #endif // MAINWINDOW_H

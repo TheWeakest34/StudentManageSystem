@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     signupview.cpp \
+    statisticview.cpp \
     studenteditview.cpp
 
 HEADERS += \
@@ -21,12 +22,14 @@ HEADERS += \
     loginview.h \
     mainwindow.h \
     signupview.h \
+    statisticview.h \
     studenteditview.h
 
 FORMS += \
     loginview.ui \
     mainwindow.ui \
     signupview.ui \
+    statisticview.ui \
     studenteditview.ui
 
 # Default rules for deployment.
