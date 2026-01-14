@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,7 +15,8 @@ SOURCES += \
     mainwindow.cpp \
     signupview.cpp \
     statisticview.cpp \
-    studenteditview.cpp
+    studenteditview.cpp \
+    trendchartview.cpp
 
 HEADERS += \
     idatabase.h \
@@ -23,14 +24,16 @@ HEADERS += \
     mainwindow.h \
     signupview.h \
     statisticview.h \
-    studenteditview.h
+    studenteditview.h \
+    trendchartview.h
 
 FORMS += \
     loginview.ui \
     mainwindow.ui \
     signupview.ui \
     statisticview.ui \
-    studenteditview.ui
+    studenteditview.ui \
+    trendchartview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

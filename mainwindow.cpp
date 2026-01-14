@@ -7,6 +7,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QTextStream>
+#include "trendchartview.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -173,17 +174,6 @@ void MainWindow::on_addNewTab_clicked()
     ui->tabWidget->setCurrentIndex(count);
 }
 
-void MainWindow::on_CloseTab_clicked()
-{
-    int index = ui->tabWidget->currentIndex();
-    IDataBase &db = IDataBase::getInstance();
-    db.studentTableModels.remove(index);
-    db.studentSelections.remove(index);
-    QWidget *tab = ui->tabWidget->widget(index);
-    ui->tabWidget->removeTab(index);
-    delete tab;
-}
-
 void MainWindow::on_Import_triggered()
 {
     QString filePath = QFileDialog::getOpenFileName(this,"选择CSV文件",
@@ -336,3 +326,31 @@ void MainWindow::on_scoreStatistics_triggered()
     statisticView->show();
 }
 
+void MainWindow::on_studentTrendChart_triggered()
+{
+    int tabIndex = ui->tabWidget->currentIndex();
+    // 确保有选中行
+    if (IDataBase::getInstance().studentSelections[tabIndex]->currentIndex().row() < 0) {
+        QMessageBox::warning(this, "提示", "请先选择一名学生！", QMessageBox::Ok);
+        return;
+    }
+
+    // 获取当前选中的学生ID
+    QModelIndex curIndex = IDataBase::getInstance().studentSelections[tabIndex]->currentIndex();
+    QSqlTableModel *model = IDataBase::getInstance().studentTableModels[tabIndex];
+
+    // 假设ID在第一列(列索引0)，或者通过字段名获取更稳妥
+    QString studentId = model->data(model->index(curIndex.row(), 0)).toString();
+
+    // 打开趋势图窗口，传入学生ID
+    TrendChartView *view = new TrendChartView(this, studentId);
+    view->exec(); // 用 exec() 模态对话框，或者 show() 非模态
+    delete view; // 如果用exec，这里可以手动删除防止内存泄漏（可选）
+}
+
+void MainWindow::on_gradeTrendChart_triggered()
+{
+    TrendChartView *view = new TrendChartView(this, "");
+    view->exec();
+    delete view;
+}

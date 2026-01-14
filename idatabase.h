@@ -33,6 +33,13 @@ public:
         int totalCount;     // 总人数
     };
 
+    struct TrendData {
+        QString examName;
+        QVector<double> scores;
+    };
+
+    QVector<TrendData> getTrendData(QString studentId);
+
     int TableCount();
     bool initNewModel(int index);
     bool searchStudent(int index,QString filter);

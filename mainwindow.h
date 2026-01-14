@@ -39,11 +39,13 @@ private slots:
 
     void on_Export_triggered();
 
-    void on_CloseTab_clicked();
-
     QString formatCsvLine(const QStringList &fields);
 
     void on_scoreStatistics_triggered();
+
+    void on_studentTrendChart_triggered();
+
+    void on_gradeTrendChart_triggered();
 
 private:
     Ui::MainWindow *ui;

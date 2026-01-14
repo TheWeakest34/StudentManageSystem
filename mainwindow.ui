@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1050</width>
+    <width>914</width>
     <height>650</height>
    </rect>
   </property>
@@ -118,17 +118,10 @@ QTableView::item:selected:!focus {
          <string>页面</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_7">
-         <item row="0" column="1">
+         <item row="0" column="0">
           <widget class="QPushButton" name="addNewTab">
            <property name="text">
             <string>添加新页面</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPushButton" name="CloseTab">
-           <property name="text">
-            <string>关闭页面</string>
            </property>
           </widget>
          </item>
@@ -278,19 +271,6 @@ QTableView::item:selected:!focus {
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
          <string>排序</string>
@@ -394,7 +374,7 @@ QTableView::item:selected:!focus {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1050</width>
+     <width>914</width>
      <height>24</height>
     </rect>
    </property>
@@ -409,8 +389,10 @@ QTableView::item:selected:!focus {
     <property name="title">
      <string>生成</string>
     </property>
+    <addaction name="separator"/>
     <addaction name="scoreStatistics"/>
-    <addaction name="changeGraph"/>
+    <addaction name="studentTrendChart"/>
+    <addaction name="gradeTrendChart"/>
     <addaction name="statisticsReport"/>
    </widget>
    <addaction name="menu"/>
@@ -450,12 +432,12 @@ QTableView::item:selected:!focus {
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="changeGraph">
+  <action name="studentTrendChart">
    <property name="text">
-    <string>成绩变化趋势图</string>
+    <string>成绩变化趋势图（学生）</string>
    </property>
    <property name="toolTip">
-    <string>成绩变化趋势图</string>
+    <string>成绩变化趋势图（学生）</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
@@ -467,6 +449,17 @@ QTableView::item:selected:!focus {
    </property>
    <property name="toolTip">
     <string>统计报表</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="gradeTrendChart">
+   <property name="text">
+    <string>成绩变化趋势图（年级）</string>
+   </property>
+   <property name="toolTip">
+    <string>成绩变化趋势图（年级）</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
