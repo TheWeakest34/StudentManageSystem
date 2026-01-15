@@ -22,7 +22,7 @@ void IDataBase::initDataBase()
 QString IDataBase::userLogin(QString userName, QString password)
 {
     if(userName.isEmpty())
-        return "\t      UserName Is Null";
+        return "UserName Is Null";
     QSqlQuery query;
     query.prepare("select UserName,Password from User where username = :USER");
     query.bindValue(":USER",userName);
@@ -32,26 +32,26 @@ QString IDataBase::userLogin(QString userName, QString password)
         if(Password == password)
             return "true";
         else
-            return "\t       Password Error！";
+            return "Password Error！";
     }
     else
-        return "\t      No Such User！";
+        return "No Such User！";
 }
 
 QString IDataBase::userSignUp(QString userName, QString password, QString confirmPassword)
 {
     if(userName.isEmpty())
-        return "\t          UserName Is Null";
+        return "UserName Is Null";
     QSqlQuery query;
     query.prepare("select UserName from User where UserName = :USER");
     query.bindValue(":USER",userName);
     query.exec();
     if(query.first() && query.value("UserName").isValid())  //用户已存在
-        return "\t          User Already Exists！";
+        return "User Already Exists！";
     else if(password.isEmpty())
-        return "\t          Password Is Null";
+        return "Password Is Null";
     else if(password != confirmPassword)
-        return "\t          Passwords Not Match！";
+        return "Passwords Not Match！";
     else
     {
         query.prepare("insert into User (UserName, Password) values (:USER, :PWD)");

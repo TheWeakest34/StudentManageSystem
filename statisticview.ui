@@ -19,14 +19,14 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_8">
          <property name="text">
           <string>统计科目</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="label_9">
          <property name="text">
           <string>总人数</string>
          </property>
