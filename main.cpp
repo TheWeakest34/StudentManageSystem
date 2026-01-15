@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         QPushButton {
             background-color: #409EFF;
             color: white;
-            border-radius: 4px;
+            border-radius: 6px;
             padding: 6px 12px;
             border: none;
         }
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         /* ========== 输入框优化 ========== */
         QLineEdit, QComboBox, QDoubleSpinBox, QSpinBox {
             border: 1px solid #DCDFE6;
-            border-radius: 4px;
+            border-radius: 6px;
             padding: 4px 8px;
             background: white;
             min-height: 20px;
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
             font-weight: bold;
             color: #606266;
             border: 1px solid #DCDFE6;
-            border-radius: 5px;
+            border-radius: 6px;
             margin-top: 10px;
             padding-top: 10px;
         }
@@ -58,6 +58,37 @@ int main(int argc, char *argv[])
             subcontrol-origin: margin;
             left: 10px;
             padding: 0 5px;
+        }
+        QComboBox {
+            border-radius: 6px;
+        }
+
+        QTabWidget::pane {
+            border: 1px solid #DCDFE6;
+            background: white;
+            border-radius: 4px;
+        }
+
+        QTabBar::tab {
+            background: #F5F7FA;
+            border: 1px solid #E4E7ED;
+            padding: 8px 16px;
+            margin-right: 2px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        /* 选中状态的Tab */
+        QTabBar::tab:selected {
+            background: #409EFF; /* 选中背景色 */
+            color: white; /* 选中文字颜色 */
+            border-color: #409EFF;
+            border-bottom-color: #fff; /* 底部边框为白色，与内容区域融合 */
+        }
+
+        /* 未选中状态的Tab */
+        QTabBar::tab:!selected {
+            color: #606266;
         }
     )");
     LoginView l;

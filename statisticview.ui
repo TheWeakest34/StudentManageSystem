@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>成绩统计</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="3">
@@ -165,6 +165,10 @@
      <property name="text">
       <string>开始统计</string>
      </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/new/prefix1/images/statistic.svg</normaloff>:/new/prefix1/images/statistic.svg</iconset>
+     </property>
     </widget>
    </item>
    <item row="1" column="2">
@@ -182,6 +186,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

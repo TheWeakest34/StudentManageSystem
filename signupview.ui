@@ -249,6 +249,10 @@
        <property name="text">
         <string>取消</string>
        </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/new/prefix1/images/cancel.svg</normaloff>:/new/prefix1/images/cancel.svg</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -270,6 +274,10 @@
        </property>
        <property name="text">
         <string>注册</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/new/prefix1/images/signup.svg</normaloff>:/new/prefix1/images/signup.svg</iconset>
        </property>
       </widget>
      </item>
@@ -303,6 +311,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

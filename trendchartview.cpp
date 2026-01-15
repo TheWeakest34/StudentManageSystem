@@ -95,4 +95,11 @@ TrendChartView::TrendChartView(QWidget *parent,QString targetId)
 TrendChartView::~TrendChartView()
 {
     delete ui;
+
+    if(ui->trendGraph->chart()) {
+        delete ui->trendGraph->chart();
+    }
+    if(ui->trendGraph_2->chart()) {
+        delete ui->trendGraph_2->chart();
+    }
 }

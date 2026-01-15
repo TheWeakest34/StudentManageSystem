@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>images/add.svg</file>
+        <file>images/addTab.svg</file>
+        <file>images/cancel.svg</file>
+        <file>images/delete.svg</file>
+        <file>images/edit.svg</file>
+        <file>images/filter.svg</file>
+        <file>images/order.svg</file>
+        <file>images/save.svg</file>
+        <file>images/select.svg</file>
+        <file>images/signin.svg</file>
+        <file>images/signup.svg</file>
+        <file>images/statistic.svg</file>
+    </qresource>
+</RCC>

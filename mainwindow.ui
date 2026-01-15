@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>学生成绩与分析系统</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QTableView::item:selected {
-    background-color: rgb(100, 181, 246);
+    background-color: rgb(64, 159, 255);
 }
 QTableView::item:selected:!focus {
     background-color: rgb(187, 222, 251);
@@ -36,6 +36,10 @@ QTableView::item:selected:!focus {
            <property name="text">
             <string>查询</string>
            </property>
+           <property name="icon">
+            <iconset resource="images.qrc">
+             <normaloff>:/new/prefix1/images/select.svg</normaloff>:/new/prefix1/images/select.svg</iconset>
+           </property>
           </widget>
          </item>
          <item row="0" column="0">
@@ -49,6 +53,10 @@ QTableView::item:selected:!focus {
           <widget class="QPushButton" name="btEdit">
            <property name="text">
             <string>修改</string>
+           </property>
+           <property name="icon">
+            <iconset resource="images.qrc">
+             <normaloff>:/new/prefix1/images/edit.svg</normaloff>:/new/prefix1/images/edit.svg</iconset>
            </property>
           </widget>
          </item>
@@ -100,12 +108,20 @@ QTableView::item:selected:!focus {
            <property name="text">
             <string>删除</string>
            </property>
+           <property name="icon">
+            <iconset resource="images.qrc">
+             <normaloff>:/new/prefix1/images/delete.svg</normaloff>:/new/prefix1/images/delete.svg</iconset>
+           </property>
           </widget>
          </item>
          <item row="0" column="3">
           <widget class="QPushButton" name="btAdd">
            <property name="text">
             <string>添加</string>
+           </property>
+           <property name="icon">
+            <iconset resource="images.qrc">
+             <normaloff>:/new/prefix1/images/add.svg</normaloff>:/new/prefix1/images/add.svg</iconset>
            </property>
           </widget>
          </item>
@@ -122,6 +138,10 @@ QTableView::item:selected:!focus {
           <widget class="QPushButton" name="addNewTab">
            <property name="text">
             <string>添加新页面</string>
+           </property>
+           <property name="icon">
+            <iconset resource="images.qrc">
+             <normaloff>:/new/prefix1/images/addTab.svg</normaloff>:/new/prefix1/images/addTab.svg</iconset>
            </property>
           </widget>
          </item>
@@ -265,6 +285,10 @@ QTableView::item:selected:!focus {
            <property name="text">
             <string>筛选</string>
            </property>
+           <property name="icon">
+            <iconset resource="images.qrc">
+             <normaloff>:/new/prefix1/images/filter.svg</normaloff>:/new/prefix1/images/filter.svg</iconset>
+           </property>
           </widget>
          </item>
         </layout>
@@ -287,6 +311,10 @@ QTableView::item:selected:!focus {
           <widget class="QPushButton" name="btOrder">
            <property name="text">
             <string>排序</string>
+           </property>
+           <property name="icon">
+            <iconset resource="images.qrc">
+             <normaloff>:/new/prefix1/images/order.svg</normaloff>:/new/prefix1/images/order.svg</iconset>
            </property>
           </widget>
          </item>
@@ -393,7 +421,6 @@ QTableView::item:selected:!focus {
     <addaction name="scoreStatistics"/>
     <addaction name="studentTrendChart"/>
     <addaction name="gradeTrendChart"/>
-    <addaction name="statisticsReport"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -443,17 +470,6 @@ QTableView::item:selected:!focus {
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="statisticsReport">
-   <property name="text">
-    <string>统计报表</string>
-   </property>
-   <property name="toolTip">
-    <string>统计报表</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
   <action name="gradeTrendChart">
    <property name="text">
     <string>成绩变化趋势图（年级）</string>
@@ -466,6 +482,8 @@ QTableView::item:selected:!focus {
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -19,6 +19,10 @@
      <property name="text">
       <string>保存</string>
      </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/new/prefix1/images/save.svg</normaloff>:/new/prefix1/images/save.svg</iconset>
+     </property>
     </widget>
    </item>
    <item row="0" column="0" colspan="4">
@@ -204,10 +208,16 @@
      <property name="text">
       <string>取消</string>
      </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/new/prefix1/images/cancel.svg</normaloff>:/new/prefix1/images/cancel.svg</iconset>
+     </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
